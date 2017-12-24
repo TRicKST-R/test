@@ -57,4 +57,4 @@ app.get('/sales', (req, res) => {
     .catch((err) => console.log(err))
 })
 
-app.listen(3001, console.log('started on 3000'))
+app.listen(3001, console.log('started on 3001'))
