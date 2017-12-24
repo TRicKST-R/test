@@ -42,8 +42,26 @@ const style = {
     width: '50%'
   }
 }
+let from = '2017-03-01'
+let to = '2017-03-01'
 
 class App extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {from, to}
+    this.props.onClickRefresh()
+    this.handleChangeFrom = this.handleChangeFrom.bind(this)
+    this.handleChangeTo = this.handleChangeTo.bind(this)
+  }
+  handleChangeFrom(e){
+    this.setState({from: e.target.value})
+    from = e.target.value
+  }
+  handleChangeTo(e){
+    this.setState({to: e.target.value})
+    to = e.target.value
+  }
+  
   render(){
     return(
       <Paper style={style.paper} elevation={4}>
@@ -57,10 +75,11 @@ class App extends Component {
           style={style.interval}
           id="dateFrom"
           type="date"
-          defaultValue="2017-03-01"
+          defaultValue={this.state.from}
           InputLabelProps={{
             shrink: true,
           }}
+          onChange={this.handleChangeFrom}
         />
         <Typography component="p" style={style.interval}>
           To
@@ -69,12 +88,13 @@ class App extends Component {
           style={style.interval}
           id="dateTo"
           type="date"
-          defaultValue="2017-03-01"
+          defaultValue={this.state.to}
           InputLabelProps={{
             shrink: true,
           }}
+          onChange={this.handleChangeTo}
         />
-        <Button raised color="primary">
+        <Button raised color="primary" onClick={this.props.onClickRefresh}>
           Refresh
           <Cached style={style.cached}/>
         </Button>
@@ -112,5 +132,8 @@ const mapStateToProps = state => ({
   goods: state.get('goods'),
   total: state.get('total')
 })
+const mapDispatchToProps = dispatch => ({
+  onClickRefresh: () => dispatch({type: 'REFRESH PLS', from, to})
+})
 
-export default connect(mapStateToProps)(App)
+export default connect(mapStateToProps, mapDispatchToProps)(App)

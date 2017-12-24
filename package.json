@@ -1,0 +1,14 @@
+{
+  "name": "test2",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/TRicKST-R/test.git",
+  "author": "TRicKST-R <alexsharnin@yandex.ru>",
+  "license": "MIT",
+  "scripts": {
+    "start": "concurrently \"cd server && yarn start\" \"cd client && yarn start\""
+  },
+  "dependencies": {
+    "concurrently": "^3.5.1"
+  }
+}

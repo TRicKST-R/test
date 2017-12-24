@@ -49,7 +49,7 @@ app.get('/sales', (req, res) => {
             res.status(200).json({
                 from: req.query.from,
                 to: req.query.to,
-                goods,
+                goods: JSON.stringify(goods),
                 total_revenue: total_revenue.toFixed(2)
             })
         }
@@ -57,4 +57,4 @@ app.get('/sales', (req, res) => {
     .catch((err) => console.log(err))
 })
 
-app.listen(3000, console.log('started on 3000'))
+app.listen(3001, console.log('started on 3000'))
